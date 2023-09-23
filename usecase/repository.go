@@ -58,4 +58,20 @@ type Repository interface {
 	// output
 	//   - error
 	DeletePayment(paymentId string) error
+
+	// ReadAllUsers reads all users in the event
+	// input
+	//   - id of the event
+	// output
+	//   - list of users
+	//   - error
+	ReadAllUsers(eventId string) (domain.UserCollection, error)
+
+	// ReadEventInfo reads event information by id
+	// input
+	//   - id of the event
+	// output
+	//   - event
+	//   - error
+	ReadEventInfo(eventId string) (domain.Event, error)
 }
