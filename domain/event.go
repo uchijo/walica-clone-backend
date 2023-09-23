@@ -2,6 +2,7 @@ package domain
 
 type Event struct {
 	Users    UserCollection
+	Name     string
 	Id       string
 	Payments PaymentCollection
 }

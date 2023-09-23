@@ -2,6 +2,7 @@ package domain
 
 // 支払い履歴
 type Payment struct {
+	Name   string
 	Price  int
 	Payer  *User
 	Payees UserCollection
