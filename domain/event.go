@@ -6,11 +6,11 @@ type Event struct {
 	Payments PaymentCollection
 }
 
-func (e Event) PaymentSummaries() []PaymentSummary {
+func (e Event) PaymentSummaries() PaymentSummaryCollection {
 	summaries := []PaymentSummary{}
-	for _, v := range e.Users {
+	for i, v := range e.Users {
 		summary := PaymentSummary{
-			User:   &v,
+			User:   &e.Users[i],
 			Debts:  e.Payments.ExtractDebts(v),
 			Assets: e.Payments.ExtractAssets(v),
 		}

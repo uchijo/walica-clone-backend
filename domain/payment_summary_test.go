@@ -120,8 +120,8 @@ func TestTmpSummaryResolve(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			tt.summaryA.resolve(&tt.summaryB)
-			successA := tt.postSummaryA.Alike(tt.summaryA)
-			successB := tt.postSummaryB.Alike(tt.summaryB)
+			successA := tt.postSummaryA.alike(tt.summaryA)
+			successB := tt.postSummaryB.alike(tt.summaryB)
 			if !successA {
 				t.Errorf("summaryA's total was expected to be [%v], but got [%v]", tt.postSummaryA.total, tt.summaryA.total)
 			}
@@ -132,6 +132,6 @@ func TestTmpSummaryResolve(t *testing.T) {
 	}
 }
 
-func (ts tmpSummary) Alike(subject tmpSummary) bool {
+func (ts tmpSummary) alike(subject tmpSummary) bool {
 	return ts.total == subject.total && ts.user.Alike(*subject.user)
 }

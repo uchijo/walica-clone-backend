@@ -28,9 +28,40 @@ func (p PaymentSummary) TotalAbs() int {
 	return int(math.Abs(float64(p.Total())))
 }
 
-// func (c PaymentSummaryCollection) Exchanges() []Exchange {
-//
-// }
+func (c PaymentSummaryCollection) Exchanges() []Exchange {
+	summaries := []tmpSummary{}
+	for _, v := range c {
+		summaries = append(summaries, v.tmpSummary())
+	}
+
+	exchanges := []Exchange{}
+
+	for {
+		if isDone(summaries) {
+			break
+		}
+
+		for outer := range summaries {
+			if summaries[outer].done() {
+				continue
+			}
+
+			for inner := outer + 1; inner < len(summaries); inner++ {
+				if summaries[inner].done() {
+					continue
+				}
+				exc, err := summaries[outer].resolve(&summaries[inner])
+				if err != nil {
+					continue
+				}
+				exchanges = append(exchanges, exc)
+				break
+			}
+		}
+	}
+
+	return exchanges
+}
 
 type tmpSummary struct {
 	user  *User
@@ -49,13 +80,15 @@ func (ts *tmpSummary) resolve(subject *tmpSummary) (Exchange, error) {
 
 	// 負債と債権が全く同じ場合
 	if ts.total+subject.total == 0 {
-		ts.total = 0
-		subject.total = 0
-		return Exchange{
-			Price: ts.total,
+		price := int(math.Abs(float64(ts.total)))
+		data := Exchange{
+			Price: price,
 			Payee: bigger(ts, subject).user,
 			Payer: smaller(ts, subject).user,
-		}, nil
+		}
+		ts.total = 0
+		subject.total = 0
+		return data, nil
 	}
 
 	// tsが打ち消される場合
@@ -79,6 +112,17 @@ func (ts *tmpSummary) resolve(subject *tmpSummary) (Exchange, error) {
 		Payee: bigger(ts, subject).user,
 		Payer: smaller(ts, subject).user,
 	}, nil
+}
+
+// 支払い完了が1以下だったら全体の計算も終わり
+func isDone(c []tmpSummary) bool {
+	doneCount := 0
+	for _, v := range c {
+		if v.done() {
+			doneCount += 1
+		}
+	}
+	return len(c)-doneCount <= 1
 }
 
 func bigger(a, b *tmpSummary) *tmpSummary {
