@@ -1,6 +1,7 @@
 package domain
 
 type Asset struct {
+	// これは割り算が絡まないのでできるだけintで保持する
 	Price int
 	Owner *User
 }

@@ -10,8 +10,8 @@ type Payment struct {
 type PaymentCollection []Payment
 
 func (p Payment) Debt(u User) Debt {
-	divider := p.Payees.Len()
-	pricePerPerson := p.Price / divider
+	divider := float64(p.Payees.Len())
+	pricePerPerson := float64(p.Price) / divider
 	return Debt{
 		Price:  pricePerPerson,
 		Debtor: &u,

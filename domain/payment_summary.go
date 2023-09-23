@@ -20,14 +20,11 @@ func (p PaymentSummary) tmpSummary() tmpSummary {
 	}
 }
 
-func (p PaymentSummary) Total() int {
-	return p.Assets.AssetSum() - p.Debts.DebtSum()
+func (p PaymentSummary) Total() float64 {
+	return float64(p.Assets.AssetSum()) - p.Debts.DebtSum()
 }
 
-func (p PaymentSummary) TotalAbs() int {
-	return int(math.Abs(float64(p.Total())))
-}
-
+// 割り切れないときとかに数円の誤差が生まれる
 func (c PaymentSummaryCollection) Exchanges() []Exchange {
 	summaries := []tmpSummary{}
 	for _, v := range c {
@@ -65,7 +62,7 @@ func (c PaymentSummaryCollection) Exchanges() []Exchange {
 
 type tmpSummary struct {
 	user  *User
-	total int
+	total float64
 }
 
 func (ts tmpSummary) done() bool {
@@ -80,9 +77,9 @@ func (ts *tmpSummary) resolve(subject *tmpSummary) (Exchange, error) {
 
 	// 負債と債権が全く同じ場合
 	if ts.total+subject.total == 0 {
-		price := int(math.Abs(float64(ts.total)))
+		price := math.Abs(ts.total)
 		data := Exchange{
-			Price: price,
+			price: price,
 			Payee: bigger(ts, subject).user,
 			Payer: smaller(ts, subject).user,
 		}
@@ -92,12 +89,12 @@ func (ts *tmpSummary) resolve(subject *tmpSummary) (Exchange, error) {
 	}
 
 	// tsが打ち消される場合
-	if math.Abs(float64(ts.total)) < math.Abs(float64(subject.total)) {
+	if math.Abs(ts.total) < math.Abs(subject.total) {
 		subject.total = ts.total + subject.total
-		price := int(math.Abs(float64(ts.total)))
+		price := math.Abs(ts.total)
 		ts.total = 0
 		return Exchange{
-			Price: price,
+			price: price,
 			Payee: bigger(ts, subject).user,
 			Payer: smaller(ts, subject).user,
 		}, nil
@@ -105,10 +102,10 @@ func (ts *tmpSummary) resolve(subject *tmpSummary) (Exchange, error) {
 
 	// 上以外、つまりsubjectが打ち消される場合
 	ts.total = ts.total + subject.total
-	price := int(math.Abs(float64(subject.total)))
+	price := math.Abs(subject.total)
 	subject.total = 0
 	return Exchange{
-		Price: price,
+		price: price,
 		Payee: bigger(ts, subject).user,
 		Payer: smaller(ts, subject).user,
 	}, nil

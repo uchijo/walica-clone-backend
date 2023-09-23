@@ -1,7 +1,7 @@
 package domain
 
 import (
-	"fmt"
+	"math"
 	"testing"
 )
 
@@ -35,7 +35,187 @@ var event1 = Event{
 	},
 }
 
-func TestExtractExchanges(t *testing.T) {
+var event2 = Event{
+	Users: []User{
+		userA, userB, userC,
+	},
+	Id: "event1",
+	Payments: []Payment{
+		{
+			Price: 1500,
+			Payer: &userA,
+			Payees: []User{
+				userA, userB, userC,
+			},
+			Id: "1",
+		},
+		{
+			Price: 1500,
+			Payer: &userA,
+			Payees: []User{
+				userA, userB, userC,
+			},
+			Id: "1",
+		},
+		{
+			Price: 1500,
+			Payer: &userA,
+			Payees: []User{
+				userA, userB,
+			},
+			Id: "1",
+		},
+	},
+}
+
+// 詳細はどうあれ、整合性が保たれていれば良いテスト
+func TestExtractExchangesRought(t *testing.T) {
+	tests := []struct {
+		name  string
+		input Event
+	}{
+		{
+			name:  "event1の整合性チェック",
+			input: event1,
+		},
+		{
+			name:  "event2の整合性チェック",
+			input: event2,
+		},
+		{
+			name: "旅行者二人、支払いなし",
+			input: Event{
+				Users:    []User{userA, userB},
+				Id:       "a",
+				Payments: []Payment{},
+			},
+		},
+		{
+			name: "旅行者二人、自分への支払いが1個",
+			input: Event{
+				Users: []User{userA, userB},
+				Id:    "a",
+				Payments: []Payment{
+					{
+						Price: 1000,
+						Payer: &userA,
+						Payees: []User{
+							userA,
+						},
+						Id: "1",
+					},
+				},
+			},
+		},
+		{
+			name: "旅行者二人、自他への支払いが1個",
+			input: Event{
+				Users: []User{userA, userB},
+				Id:    "a",
+				Payments: []Payment{
+					{
+						Price: 1000,
+						Payer: &userA,
+						Payees: []User{
+							userA, userB,
+						},
+						Id: "1",
+					},
+				},
+			},
+		},
+		{
+			name: "旅行者3人、割り切れない場合",
+			input: Event{
+				Users: []User{userA, userB, userC},
+				Id:    "a",
+				Payments: []Payment{
+					{
+						Price: 1000,
+						Payer: &userA,
+						Payees: []User{
+							userA, userB, userC,
+						},
+						Id: "1",
+					},
+				},
+			},
+		},
+		{
+			name: "旅行者3人、割り切れないのがたくさん",
+			input: Event{
+				Users: []User{userA, userB, userC},
+				Id:    "a",
+				Payments: []Payment{
+					{
+						Price: 1000,
+						Payer: &userA,
+						Payees: []User{
+							userA, userB, userC,
+						},
+						Id: "1",
+					},
+					{
+						Price: 1000,
+						Payer: &userA,
+						Payees: []User{
+							userA, userB, userC,
+						},
+						Id: "1",
+					},
+					{
+						Price: 1000,
+						Payer: &userA,
+						Payees: []User{
+							userA, userB, userC,
+						},
+						Id: "1",
+					},
+					{
+						Price: 1000,
+						Payer: &userA,
+						Payees: []User{
+							userA, userB, userC,
+						},
+						Id: "1",
+					},
+					{
+						Price: 1000,
+						Payer: &userA,
+						Payees: []User{
+							userA, userB, userC,
+						},
+						Id: "1",
+					},
+				},
+			},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			exc := tt.input.PaymentSummaries().Exchanges()
+			for _, v := range tt.input.PaymentSummaries() {
+				expectedTotal := v.Total()
+				actualTotal := 0.0
+				for _, vv := range exc {
+					if vv.Payee.Alike(*v.User) {
+						actualTotal += vv.price
+					}
+					if vv.Payer.Alike(*v.User) {
+						actualTotal -= vv.price
+					}
+				}
+				if math.Abs(actualTotal-expectedTotal) > 2 {
+					t.Errorf("expected total is %v, but got %v", expectedTotal, actualTotal)
+				}
+			}
+		})
+	}
+}
+
+// より詳細なテスト。exchangeの中身まで気にする。
+func TestExtractExchangesDetailed(t *testing.T) {
 	tests := []struct {
 		name      string
 		input     Event
@@ -46,12 +226,28 @@ func TestExtractExchanges(t *testing.T) {
 			input: event1,
 			exchanges: []Exchange{
 				{
-					Price: 1000,
+					price: 1000,
 					Payee: &userA,
 					Payer: &userB,
 				},
 				{
-					Price: 1000,
+					price: 1000,
+					Payee: &userA,
+					Payer: &userC,
+				},
+			},
+		},
+		{
+			name:  "event2を正しく計算できる",
+			input: event2,
+			exchanges: []Exchange{
+				{
+					price: 1750,
+					Payee: &userA,
+					Payer: &userB,
+				},
+				{
+					price: 1000,
 					Payee: &userA,
 					Payer: &userC,
 				},
@@ -62,11 +258,6 @@ func TestExtractExchanges(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got := tt.input.PaymentSummaries().Exchanges()
-			fmt.Println("\n\nexchanges:")
-			for _, v := range got {
-				fmt.Printf("%+v, payer: %v, payee: %v\n", v, v.Payer.Name, v.Payee.Name)
-			}
-			fmt.Println("")
 			ok := exchangesAlike(got, tt.exchanges)
 			if !ok {
 				t.Errorf("expected %v, got %v", tt.exchanges, got)
@@ -82,7 +273,7 @@ func exchangesAlike(exc1, exc2 []Exchange) bool {
 	for _, v := range exc1 {
 		ok := false
 		for _, vv := range exc2 {
-			if v.Price == vv.Price && v.Payee.Alike(*vv.Payee) && v.Payer.Alike(*vv.Payer) {
+			if v.price == vv.price && v.Payee.Alike(*vv.Payee) && v.Payer.Alike(*vv.Payer) {
 				ok = true
 				break
 			}
