@@ -6,3 +6,11 @@ type Debt struct {
 }
 
 type DebtCollection []Debt
+
+func (dc DebtCollection) DebtSum() int {
+	sum := 0
+	for _, v := range dc {
+		sum += v.Price
+	}
+	return sum
+}
