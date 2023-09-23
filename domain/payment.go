@@ -1,5 +1,6 @@
 package domain
 
+// 支払い履歴
 type Payment struct {
 	Price  int
 	Payer  *User
@@ -7,6 +8,7 @@ type Payment struct {
 	Id     string
 }
 
+// 支払い履歴のリスト
 type PaymentCollection []Payment
 
 func (p Payment) Debt(u User) Debt {
@@ -43,4 +45,12 @@ func (pc PaymentCollection) ExtractAssets(u User) AssetCollection {
 		}
 	}
 	return assets
+}
+
+func (pc PaymentCollection) PaymentSum() int {
+	sum := 0
+	for _, v := range pc {
+		sum += v.Price
+	}
+	return sum
 }

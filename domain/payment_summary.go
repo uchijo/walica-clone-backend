@@ -5,12 +5,14 @@ import (
 	"math"
 )
 
+// ユーザとそれに紐づいたすべての負債と債権をまとめる
 type PaymentSummary struct {
 	User   *User
 	Assets AssetCollection
 	Debts  DebtCollection
 }
 
+// 各ユーザのすべての貸し借りのリスト
 type PaymentSummaryCollection []PaymentSummary
 
 func (p PaymentSummary) tmpSummary() tmpSummary {
