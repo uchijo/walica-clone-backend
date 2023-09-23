@@ -1,25 +1,20 @@
 package domain
 
-import "errors"
-
 type Event struct {
 	Users    UserCollection
 	Id       string
 	Payments PaymentCollection
 }
 
-func (e Event) DebtForUser(u User) (DebtCollection, error) {
-	if !e.Users.Contains(u) {
-		return nil, errors.New("user not found")
+func (e Event) PaymentSummaries() []PaymentSummary {
+	summaries := []PaymentSummary{}
+	for _, v := range e.Users {
+		summary := PaymentSummary{
+			User:   &v,
+			Debts:  e.Payments.ExtractDebts(v),
+			Assets: e.Payments.ExtractAssets(v),
+		}
+		summaries = append(summaries, summary)
 	}
-
-	return e.Payments.ExtractDebts(u), nil
-}
-
-func (e Event) AssetsForUser(u User) (AssetCollection, error) {
-	if !e.Users.Contains(u) {
-		return nil, errors.New("user not found")
-	}
-
-	return e.Payments.ExtractAssets(u), nil
+	return summaries
 }
