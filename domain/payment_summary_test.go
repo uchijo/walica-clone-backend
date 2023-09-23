@@ -12,7 +12,7 @@ var userB = User{
 	Id:   "B",
 }
 
-func TestTmpSummaryDone(t *testing.T) {
+func TestTmpSummaryResolve(t *testing.T) {
 	tests := []struct {
 		name         string
 		summaryA     tmpSummary
