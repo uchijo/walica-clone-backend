@@ -159,11 +159,16 @@ func convertUser(input model.User) domain.User {
 }
 
 func convertPayment(input model.Payment) (domain.Payment, error) {
-	payer := convertUser(input.Payer)
+	rawPayer := model.User{}
+	if err := util.DB.Where("id = ?", input.PayerId).First(&rawPayer).Error; err != nil {
+		return domain.Payment{}, nil
+	}
+	payer := convertUser(rawPayer)
 	result := &model.Payment{}
 	if err := util.DB.
 		Where("id = ?", input.ID).
-		Preload("Payees").First(result).Error; err != nil {
+		Preload("Payees").
+		First(result).Error; err != nil {
 		return domain.Payment{}, nil
 	}
 

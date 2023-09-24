@@ -125,6 +125,24 @@ func TestExtractExchangesRought(t *testing.T) {
 			},
 		},
 		{
+			name: "Alice, Bob(e2eで死んだやつ)",
+			input: Event{
+				Users: []User{userA, userB},
+				Id:    "a",
+				Payments: []Payment{
+					{
+						Name: "buy ticket",
+						Price: 3000,
+						Payer: &userA,
+						Payees: []User{
+							userA, userB,
+						},
+						Id: "1",
+					},
+				},
+			},
+		},
+		{
 			name: "旅行者3人、割り切れない場合",
 			input: Event{
 				Users: []User{userA, userB, userC},
