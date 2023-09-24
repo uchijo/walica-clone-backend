@@ -1,0 +1,4 @@
+version: v1
+name: buf.build/uchijo/walica-clone-backend
+deps:
+  - buf.build/googleapis/googleapis

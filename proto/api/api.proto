@@ -1,0 +1,100 @@
+syntax = "proto3";
+
+package api;
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/uchijo/walica-clone-backend/proto/proto/api";
+
+service WalicaCloneApi {
+  rpc AddPayment(AddPaymentRequest) returns (AddPaymentReply) {
+    option (google.api.http) = {
+      post : "/v1/payment/add"
+      body : "*"
+    };
+  }
+  rpc CreateEvent(CreateEventRequest) returns (CreateEventReply) {
+    option (google.api.http) = {
+      post : "/v1/event/add"
+      body : "*"
+    };
+  }
+  rpc ReadInfo(ReadInfoRequest) returns (ReadInfoReply) {
+    option (google.api.http) = {
+      post : "/v1/event/info"
+      body : "*"
+    };
+  }
+  rpc UpdatePayment(UpdatePaymentRequest) returns (UpdatePaymentReply) {
+    option (google.api.http) = {
+      post : "/v1/payment/update"
+      body : "*"
+    };
+  }
+}
+
+message AddPaymentRequest {
+  string name = 1;
+  int32 price = 2;
+  string payerId = 3;
+  repeated string payeeIds = 4;
+}
+
+message AddPaymentReply { string id = 1; }
+
+message CreateEventRequest {
+  string name = 1;
+  repeated string members = 2;
+}
+
+message CreateEventReply { string id = 1; }
+
+message ReadInfoRequest { string id = 1; }
+
+message ReadInfoReply {
+  repeated Payment payments = 1;
+  repeated Exchange exchanges = 2;
+  repeated PaymentSummary summaries = 3;
+  int32 totalExpense = 4;
+}
+
+message UpdatePaymentRequest {
+  string paymentId = 1;
+  string name = 2;
+  int32 price = 3;
+  string payerId = 4;
+  repeated string payeeIds = 5;
+}
+
+message UpdatePaymentReply { string paymentId = 1; }
+
+message Event {
+  string name = 1;
+  string id = 2;
+  repeated User users = 3;
+  repeated Payment payments = 4;
+}
+
+message User {
+  string name = 1;
+  string id = 2;
+}
+
+message Payment {
+  string name = 1;
+  int32 price = 2;
+  User payer = 3;
+  repeated User payees = 4;
+  string id = 5;
+}
+
+message Exchange {
+  int32 price = 1;
+  User payer = 2;
+  User payee = 3;
+}
+
+message PaymentSummary {
+  User user = 1;
+  int32 totalExpense = 2;
+}
