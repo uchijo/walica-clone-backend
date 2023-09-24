@@ -31,5 +31,7 @@ type Payment struct {
 
 type User struct {
 	gorm.Model
-	Name string
+	Name    string
+	EventId string
+	Event   Event
 }
