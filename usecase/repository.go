@@ -18,7 +18,7 @@ type Repository interface {
 	// output
 	//   - list of payment info
 	//   - error
-	ReadAllPayments(eventId string) (domain.PaymentCollection, error)
+	// ReadAllPayments(eventId string) (domain.PaymentCollection, error)
 
 	// ReadPayment returns a payment with given payment id
 	// input
@@ -26,7 +26,7 @@ type Repository interface {
 	// output
 	//   - payment info
 	//   - error
-	ReadPayment(paymentId string) domain.Payment
+	// ReadPayment(paymentId string) domain.Payment
 
 	// CreatePayment creates payment record
 	// input
@@ -57,7 +57,7 @@ type Repository interface {
 	//   - id of deleting payment
 	// output
 	//   - error
-	DeletePayment(paymentId string) error
+	// DeletePayment(paymentId string) error
 
 	// ReadAllUsers reads all users in the event
 	// input
@@ -65,7 +65,7 @@ type Repository interface {
 	// output
 	//   - list of users
 	//   - error
-	ReadAllUsers(eventId string) (domain.UserCollection, error)
+	// ReadAllUsers(eventId string) (domain.UserCollection, error)
 
 	// ReadEventInfo reads event information by id
 	// input

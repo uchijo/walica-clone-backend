@@ -34,4 +34,5 @@ type User struct {
 	Name    string
 	EventId string
 	Event   Event
+	Payments []Payment `gorm:"many2many:payees;"`
 }
