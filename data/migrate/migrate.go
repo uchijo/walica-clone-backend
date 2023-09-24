@@ -13,7 +13,7 @@ func init() {
 }
 
 func main() {
-	err := util.DB.AutoMigrate(&model.Event{})
+	err := util.DB.AutoMigrate(&model.Event{}, &model.Payment{}, &model.User{})
 	if err != nil {
 		log.Fatal("migration failed")
 	}
