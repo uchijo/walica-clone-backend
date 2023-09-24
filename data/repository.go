@@ -10,13 +10,15 @@ import (
 
 	"github.com/uchijo/walica-clone-backend/domain"
 
-	// "github.com/uchijo/walica-clone-backend/usecase"
+	"github.com/uchijo/walica-clone-backend/usecase"
 	"github.com/uchijo/walica-clone-backend/util"
 )
 
-type RepositoryImpl struct{}
+type RepositoryImpl struct {
+	usecase.Repository
+}
 
-// var _ usecase.Repository = (*RepositoryImpl)(nil)
+var _ usecase.Repository = (*RepositoryImpl)(nil)
 
 func (r RepositoryImpl) CreateEvent(name string, users []string) (string, error) {
 	id, err := uuid.NewRandom()

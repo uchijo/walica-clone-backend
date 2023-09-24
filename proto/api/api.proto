@@ -37,7 +37,8 @@ message AddPaymentRequest {
   string name = 1;
   int32 price = 2;
   string payerId = 3;
-  repeated string payeeIds = 4;
+  string eventId = 4;
+  repeated string payeeIds = 5;
 }
 
 message AddPaymentReply { string id = 1; }
