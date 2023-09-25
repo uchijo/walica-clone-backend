@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	"github.com/rs/cors"
 	"github.com/uchijo/walica-clone-backend/data"
 	"github.com/uchijo/walica-clone-backend/presenter"
 	apipb "github.com/uchijo/walica-clone-backend/proto/proto/api"
@@ -51,9 +52,15 @@ func main() {
 		log.Fatalln("Failed to register gateway:", err)
 	}
 
+	withCors := cors.New(cors.Options{
+		AllowedOrigins: []string{"http://localhost:3000"},
+		AllowedMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders: []string{"*"},
+	}).Handler(gwmux)
+
 	gwServer := &http.Server{
 		Addr:    ":8090",
-		Handler: gwmux,
+		Handler: withCors,
 	}
 
 	log.Println("Serving gRPC-Gateway on http://0.0.0.0:8090")
