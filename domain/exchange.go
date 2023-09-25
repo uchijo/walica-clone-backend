@@ -2,6 +2,7 @@ package domain
 
 import "math"
 
+// 精算時、誰が誰にいくら払うかを表現するオブジェクト
 type Exchange struct {
 	// 整合性のためできるだけfloatで持っておく
 	price float64

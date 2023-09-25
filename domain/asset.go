@@ -1,5 +1,6 @@
 package domain
 
+// Paymentから得た、支払った人とその支払の額
 type Asset struct {
 	// これは割り算が絡まないのでできるだけintで保持する
 	Price int

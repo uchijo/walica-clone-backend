@@ -1,5 +1,6 @@
 package domain
 
+// Paymentから得た、支払ってもらった人と負債の額
 type Debt struct {
 	// 割り算が絡むのでfloatにして後で均す
 	Price  float64

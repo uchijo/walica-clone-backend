@@ -1,5 +1,6 @@
 package domain
 
+// Eventに登録する参加者
 type User struct {
 	Name string
 	Id   string

@@ -1,5 +1,6 @@
 package domain
 
+// 支払いをまとめる単位
 type Event struct {
 	Users    UserCollection
 	Name     string
