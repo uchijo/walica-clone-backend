@@ -65,7 +65,7 @@ type Repository interface {
 	// output
 	//   - list of users
 	//   - error
-	// ReadAllUsers(eventId string) (domain.UserCollection, error)
+	ReadAllUsers(eventId string) (domain.UserCollection, error)
 
 	// ReadEventInfo reads event information by id
 	// input

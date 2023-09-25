@@ -31,6 +31,12 @@ service WalicaCloneApi {
       body : "*"
     };
   }
+  rpc ReadAllUsers(ReadAllUsersRequest) returns (ReadAllUsersReply) {
+    option (google.api.http) = {
+      post : "/v1/user/all"
+      body : "*"
+    };
+  }
 }
 
 message AddPaymentRequest {
@@ -68,6 +74,10 @@ message UpdatePaymentRequest {
 }
 
 message UpdatePaymentReply { string paymentId = 1; }
+
+message ReadAllUsersRequest { string eventId = 1; }
+
+message ReadAllUsersReply { repeated User users = 1; }
 
 message Event {
   string name = 1;

@@ -143,6 +143,38 @@
           "WalicaCloneApi"
         ]
       }
+    },
+    "/v1/user/all": {
+      "post": {
+        "operationId": "WalicaCloneApi_ReadAllUsers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiReadAllUsersReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiReadAllUsersRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WalicaCloneApi"
+        ]
+      }
     }
   },
   "definitions": {
@@ -249,6 +281,26 @@
         "totalExpense": {
           "type": "integer",
           "format": "int32"
+        }
+      }
+    },
+    "apiReadAllUsersReply": {
+      "type": "object",
+      "properties": {
+        "users": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/apiUser"
+          }
+        }
+      }
+    },
+    "apiReadAllUsersRequest": {
+      "type": "object",
+      "properties": {
+        "eventId": {
+          "type": "string"
         }
       }
     },
