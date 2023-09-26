@@ -43,7 +43,17 @@ service WalicaCloneApi {
       body : "*"
     };
   }
+  rpc DeletePayment(DeletePaymentRequest) returns (DeletePaymentReply) {
+    option (google.api.http) = {
+      post : "/v1/payment/delete"
+      body : "*"
+    };
+  }
 }
+
+message DeletePaymentRequest { string paymentId = 1; }
+
+message DeletePaymentReply { string paymentId = 1; }
 
 message ReadPaymentRequest { string paymentId = 1; }
 

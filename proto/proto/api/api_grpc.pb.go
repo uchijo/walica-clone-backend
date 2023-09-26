@@ -25,6 +25,7 @@ const (
 	WalicaCloneApi_UpdatePayment_FullMethodName = "/api.WalicaCloneApi/UpdatePayment"
 	WalicaCloneApi_ReadAllUsers_FullMethodName  = "/api.WalicaCloneApi/ReadAllUsers"
 	WalicaCloneApi_ReadPayment_FullMethodName   = "/api.WalicaCloneApi/ReadPayment"
+	WalicaCloneApi_DeletePayment_FullMethodName = "/api.WalicaCloneApi/DeletePayment"
 )
 
 // WalicaCloneApiClient is the client API for WalicaCloneApi service.
@@ -37,6 +38,7 @@ type WalicaCloneApiClient interface {
 	UpdatePayment(ctx context.Context, in *UpdatePaymentRequest, opts ...grpc.CallOption) (*UpdatePaymentReply, error)
 	ReadAllUsers(ctx context.Context, in *ReadAllUsersRequest, opts ...grpc.CallOption) (*ReadAllUsersReply, error)
 	ReadPayment(ctx context.Context, in *ReadPaymentRequest, opts ...grpc.CallOption) (*ReadPaymentReply, error)
+	DeletePayment(ctx context.Context, in *DeletePaymentRequest, opts ...grpc.CallOption) (*DeletePaymentReply, error)
 }
 
 type walicaCloneApiClient struct {
@@ -101,6 +103,15 @@ func (c *walicaCloneApiClient) ReadPayment(ctx context.Context, in *ReadPaymentR
 	return out, nil
 }
 
+func (c *walicaCloneApiClient) DeletePayment(ctx context.Context, in *DeletePaymentRequest, opts ...grpc.CallOption) (*DeletePaymentReply, error) {
+	out := new(DeletePaymentReply)
+	err := c.cc.Invoke(ctx, WalicaCloneApi_DeletePayment_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalicaCloneApiServer is the server API for WalicaCloneApi service.
 // All implementations should embed UnimplementedWalicaCloneApiServer
 // for forward compatibility
@@ -111,6 +122,7 @@ type WalicaCloneApiServer interface {
 	UpdatePayment(context.Context, *UpdatePaymentRequest) (*UpdatePaymentReply, error)
 	ReadAllUsers(context.Context, *ReadAllUsersRequest) (*ReadAllUsersReply, error)
 	ReadPayment(context.Context, *ReadPaymentRequest) (*ReadPaymentReply, error)
+	DeletePayment(context.Context, *DeletePaymentRequest) (*DeletePaymentReply, error)
 }
 
 // UnimplementedWalicaCloneApiServer should be embedded to have forward compatible implementations.
@@ -134,6 +146,9 @@ func (UnimplementedWalicaCloneApiServer) ReadAllUsers(context.Context, *ReadAllU
 }
 func (UnimplementedWalicaCloneApiServer) ReadPayment(context.Context, *ReadPaymentRequest) (*ReadPaymentReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReadPayment not implemented")
+}
+func (UnimplementedWalicaCloneApiServer) DeletePayment(context.Context, *DeletePaymentRequest) (*DeletePaymentReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeletePayment not implemented")
 }
 
 // UnsafeWalicaCloneApiServer may be embedded to opt out of forward compatibility for this service.
@@ -255,6 +270,24 @@ func _WalicaCloneApi_ReadPayment_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WalicaCloneApi_DeletePayment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeletePaymentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalicaCloneApiServer).DeletePayment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WalicaCloneApi_DeletePayment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalicaCloneApiServer).DeletePayment(ctx, req.(*DeletePaymentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // WalicaCloneApi_ServiceDesc is the grpc.ServiceDesc for WalicaCloneApi service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -285,6 +318,10 @@ var WalicaCloneApi_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReadPayment",
 			Handler:    _WalicaCloneApi_ReadPayment_Handler,
+		},
+		{
+			MethodName: "DeletePayment",
+			Handler:    _WalicaCloneApi_DeletePayment_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
