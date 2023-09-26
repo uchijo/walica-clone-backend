@@ -63,6 +63,7 @@ message ReadInfoReply {
   repeated Exchange exchanges = 2;
   repeated PaymentSummary summaries = 3;
   int32 totalExpense = 4;
+  string eventName = 5;
 }
 
 message UpdatePaymentRequest {

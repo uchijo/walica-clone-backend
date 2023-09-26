@@ -331,6 +331,9 @@
         "totalExpense": {
           "type": "integer",
           "format": "int32"
+        },
+        "eventName": {
+          "type": "string"
         }
       }
     },

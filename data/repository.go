@@ -151,7 +151,7 @@ func (r RepositoryImpl) ReadEventInfo(eventId string) (domain.Event, error) {
 	return event, nil
 }
 
-func ReadAllUsers(eventId string) (domain.UserCollection, error) {
+func (r RepositoryImpl) ReadAllUsers(eventId string) (domain.UserCollection, error) {
 	rawUsers := []model.User{}
 	if err := util.DB.Where("event_id == ?", eventId).Find(&rawUsers).Error; err != nil {
 		return nil, err

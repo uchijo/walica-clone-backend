@@ -66,6 +66,7 @@ func (s *server) ReadInfo(ctx context.Context, req *apipb.ReadInfoRequest) (*api
 		Exchanges:    exchanges,
 		Summaries:    summaries,
 		TotalExpense: int32(out.TotalExpense),
+		EventName:    out.EventName,
 	}, nil
 }
 
@@ -86,10 +87,24 @@ func (s *server) UpdatePayment(ctx context.Context, req *apipb.UpdatePaymentRequ
 	}, nil
 }
 
+func (s *server) ReadAllUsers(ctx context.Context, req *apipb.ReadAllUsersRequest) (*apipb.ReadAllUsersReply, error) {
+	users, err := usecase.ReadUsers(*s.repositry, req.EventId)
+	if err != nil {
+		return nil, err
+	}
+	apiUsers := []*apipb.User{}
+	for _, v := range users {
+		apiUsers = append(apiUsers, convertUser(v))
+	}
+	return &apipb.ReadAllUsersReply{
+		Users: apiUsers,
+	}, nil
+}
+
 func convertSummary(s domain.PaymentSummary) *apipb.PaymentSummary {
 	return &apipb.PaymentSummary{
 		User:         convertUser(*s.User),
-		TotalExpense: int32(s.Total()),
+		TotalExpense: int32(s.Debts.DebtSum()),
 	}
 }
 

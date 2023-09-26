@@ -12,6 +12,7 @@ func ReadInfo(repo Repository, eventId string) (ReadInfoOutput, error) {
 		Exchanges:    event.PaymentSummaries().Exchanges(),
 		Summaries:    event.PaymentSummaries(),
 		TotalExpense: event.Payments.PaymentSum(),
+		EventName:    event.Name,
 	}, nil
 }
 
@@ -20,4 +21,5 @@ type ReadInfoOutput struct {
 	Exchanges    []domain.Exchange
 	Summaries    domain.PaymentSummaryCollection
 	TotalExpense int
+	EventName    string
 }

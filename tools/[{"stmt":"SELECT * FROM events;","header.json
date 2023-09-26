@@ -1,0 +1,21 @@
+[
+    {
+        "stmt": "SELECT * FROM events;",
+        "header": [
+            "id",
+            "name",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+        ],
+        "rows": [
+            [
+                "327ac2b3-f855-42eb-9d60-9e969a39b8fa",
+                "test event",
+                "2023-09-24 23:09:20.313244801+09:00",
+                "2023-09-24 23:09:20.313244801+09:00",
+                "NULL"
+            ]
+        ]
+    }
+]
