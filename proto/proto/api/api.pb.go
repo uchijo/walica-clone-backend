@@ -21,6 +21,100 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type ReadPaymentRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	PaymentId string `protobuf:"bytes,1,opt,name=paymentId,proto3" json:"paymentId,omitempty"`
+}
+
+func (x *ReadPaymentRequest) Reset() {
+	*x = ReadPaymentRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_api_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ReadPaymentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReadPaymentRequest) ProtoMessage() {}
+
+func (x *ReadPaymentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_api_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReadPaymentRequest.ProtoReflect.Descriptor instead.
+func (*ReadPaymentRequest) Descriptor() ([]byte, []int) {
+	return file_api_api_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *ReadPaymentRequest) GetPaymentId() string {
+	if x != nil {
+		return x.PaymentId
+	}
+	return ""
+}
+
+type ReadPaymentReply struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Payment *Payment `protobuf:"bytes,1,opt,name=payment,proto3" json:"payment,omitempty"`
+}
+
+func (x *ReadPaymentReply) Reset() {
+	*x = ReadPaymentReply{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_api_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ReadPaymentReply) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReadPaymentReply) ProtoMessage() {}
+
+func (x *ReadPaymentReply) ProtoReflect() protoreflect.Message {
+	mi := &file_api_api_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReadPaymentReply.ProtoReflect.Descriptor instead.
+func (*ReadPaymentReply) Descriptor() ([]byte, []int) {
+	return file_api_api_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ReadPaymentReply) GetPayment() *Payment {
+	if x != nil {
+		return x.Payment
+	}
+	return nil
+}
+
 type AddPaymentRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -36,7 +130,7 @@ type AddPaymentRequest struct {
 func (x *AddPaymentRequest) Reset() {
 	*x = AddPaymentRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_api_proto_msgTypes[0]
+		mi := &file_api_api_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -49,7 +143,7 @@ func (x *AddPaymentRequest) String() string {
 func (*AddPaymentRequest) ProtoMessage() {}
 
 func (x *AddPaymentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_api_proto_msgTypes[0]
+	mi := &file_api_api_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -62,7 +156,7 @@ func (x *AddPaymentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddPaymentRequest.ProtoReflect.Descriptor instead.
 func (*AddPaymentRequest) Descriptor() ([]byte, []int) {
-	return file_api_api_proto_rawDescGZIP(), []int{0}
+	return file_api_api_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *AddPaymentRequest) GetName() string {
@@ -111,7 +205,7 @@ type AddPaymentReply struct {
 func (x *AddPaymentReply) Reset() {
 	*x = AddPaymentReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_api_proto_msgTypes[1]
+		mi := &file_api_api_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -124,7 +218,7 @@ func (x *AddPaymentReply) String() string {
 func (*AddPaymentReply) ProtoMessage() {}
 
 func (x *AddPaymentReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_api_proto_msgTypes[1]
+	mi := &file_api_api_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -137,7 +231,7 @@ func (x *AddPaymentReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddPaymentReply.ProtoReflect.Descriptor instead.
 func (*AddPaymentReply) Descriptor() ([]byte, []int) {
-	return file_api_api_proto_rawDescGZIP(), []int{1}
+	return file_api_api_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *AddPaymentReply) GetId() string {
@@ -159,7 +253,7 @@ type CreateEventRequest struct {
 func (x *CreateEventRequest) Reset() {
 	*x = CreateEventRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_api_proto_msgTypes[2]
+		mi := &file_api_api_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -172,7 +266,7 @@ func (x *CreateEventRequest) String() string {
 func (*CreateEventRequest) ProtoMessage() {}
 
 func (x *CreateEventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_api_proto_msgTypes[2]
+	mi := &file_api_api_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -185,7 +279,7 @@ func (x *CreateEventRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateEventRequest.ProtoReflect.Descriptor instead.
 func (*CreateEventRequest) Descriptor() ([]byte, []int) {
-	return file_api_api_proto_rawDescGZIP(), []int{2}
+	return file_api_api_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *CreateEventRequest) GetName() string {
@@ -213,7 +307,7 @@ type CreateEventReply struct {
 func (x *CreateEventReply) Reset() {
 	*x = CreateEventReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_api_proto_msgTypes[3]
+		mi := &file_api_api_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -226,7 +320,7 @@ func (x *CreateEventReply) String() string {
 func (*CreateEventReply) ProtoMessage() {}
 
 func (x *CreateEventReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_api_proto_msgTypes[3]
+	mi := &file_api_api_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -239,7 +333,7 @@ func (x *CreateEventReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateEventReply.ProtoReflect.Descriptor instead.
 func (*CreateEventReply) Descriptor() ([]byte, []int) {
-	return file_api_api_proto_rawDescGZIP(), []int{3}
+	return file_api_api_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *CreateEventReply) GetId() string {
@@ -260,7 +354,7 @@ type ReadInfoRequest struct {
 func (x *ReadInfoRequest) Reset() {
 	*x = ReadInfoRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_api_proto_msgTypes[4]
+		mi := &file_api_api_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -273,7 +367,7 @@ func (x *ReadInfoRequest) String() string {
 func (*ReadInfoRequest) ProtoMessage() {}
 
 func (x *ReadInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_api_proto_msgTypes[4]
+	mi := &file_api_api_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -286,7 +380,7 @@ func (x *ReadInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReadInfoRequest.ProtoReflect.Descriptor instead.
 func (*ReadInfoRequest) Descriptor() ([]byte, []int) {
-	return file_api_api_proto_rawDescGZIP(), []int{4}
+	return file_api_api_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *ReadInfoRequest) GetId() string {
@@ -311,7 +405,7 @@ type ReadInfoReply struct {
 func (x *ReadInfoReply) Reset() {
 	*x = ReadInfoReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_api_proto_msgTypes[5]
+		mi := &file_api_api_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -324,7 +418,7 @@ func (x *ReadInfoReply) String() string {
 func (*ReadInfoReply) ProtoMessage() {}
 
 func (x *ReadInfoReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_api_proto_msgTypes[5]
+	mi := &file_api_api_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -337,7 +431,7 @@ func (x *ReadInfoReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReadInfoReply.ProtoReflect.Descriptor instead.
 func (*ReadInfoReply) Descriptor() ([]byte, []int) {
-	return file_api_api_proto_rawDescGZIP(), []int{5}
+	return file_api_api_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ReadInfoReply) GetPayments() []*Payment {
@@ -390,7 +484,7 @@ type UpdatePaymentRequest struct {
 func (x *UpdatePaymentRequest) Reset() {
 	*x = UpdatePaymentRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_api_proto_msgTypes[6]
+		mi := &file_api_api_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -403,7 +497,7 @@ func (x *UpdatePaymentRequest) String() string {
 func (*UpdatePaymentRequest) ProtoMessage() {}
 
 func (x *UpdatePaymentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_api_proto_msgTypes[6]
+	mi := &file_api_api_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -416,7 +510,7 @@ func (x *UpdatePaymentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdatePaymentRequest.ProtoReflect.Descriptor instead.
 func (*UpdatePaymentRequest) Descriptor() ([]byte, []int) {
-	return file_api_api_proto_rawDescGZIP(), []int{6}
+	return file_api_api_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UpdatePaymentRequest) GetPaymentId() string {
@@ -465,7 +559,7 @@ type UpdatePaymentReply struct {
 func (x *UpdatePaymentReply) Reset() {
 	*x = UpdatePaymentReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_api_proto_msgTypes[7]
+		mi := &file_api_api_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -478,7 +572,7 @@ func (x *UpdatePaymentReply) String() string {
 func (*UpdatePaymentReply) ProtoMessage() {}
 
 func (x *UpdatePaymentReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_api_proto_msgTypes[7]
+	mi := &file_api_api_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -491,7 +585,7 @@ func (x *UpdatePaymentReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdatePaymentReply.ProtoReflect.Descriptor instead.
 func (*UpdatePaymentReply) Descriptor() ([]byte, []int) {
-	return file_api_api_proto_rawDescGZIP(), []int{7}
+	return file_api_api_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *UpdatePaymentReply) GetPaymentId() string {
@@ -512,7 +606,7 @@ type ReadAllUsersRequest struct {
 func (x *ReadAllUsersRequest) Reset() {
 	*x = ReadAllUsersRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_api_proto_msgTypes[8]
+		mi := &file_api_api_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -525,7 +619,7 @@ func (x *ReadAllUsersRequest) String() string {
 func (*ReadAllUsersRequest) ProtoMessage() {}
 
 func (x *ReadAllUsersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_api_proto_msgTypes[8]
+	mi := &file_api_api_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -538,7 +632,7 @@ func (x *ReadAllUsersRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReadAllUsersRequest.ProtoReflect.Descriptor instead.
 func (*ReadAllUsersRequest) Descriptor() ([]byte, []int) {
-	return file_api_api_proto_rawDescGZIP(), []int{8}
+	return file_api_api_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ReadAllUsersRequest) GetEventId() string {
@@ -559,7 +653,7 @@ type ReadAllUsersReply struct {
 func (x *ReadAllUsersReply) Reset() {
 	*x = ReadAllUsersReply{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_api_proto_msgTypes[9]
+		mi := &file_api_api_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -572,7 +666,7 @@ func (x *ReadAllUsersReply) String() string {
 func (*ReadAllUsersReply) ProtoMessage() {}
 
 func (x *ReadAllUsersReply) ProtoReflect() protoreflect.Message {
-	mi := &file_api_api_proto_msgTypes[9]
+	mi := &file_api_api_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -585,7 +679,7 @@ func (x *ReadAllUsersReply) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReadAllUsersReply.ProtoReflect.Descriptor instead.
 func (*ReadAllUsersReply) Descriptor() ([]byte, []int) {
-	return file_api_api_proto_rawDescGZIP(), []int{9}
+	return file_api_api_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ReadAllUsersReply) GetUsers() []*User {
@@ -609,7 +703,7 @@ type Event struct {
 func (x *Event) Reset() {
 	*x = Event{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_api_proto_msgTypes[10]
+		mi := &file_api_api_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -622,7 +716,7 @@ func (x *Event) String() string {
 func (*Event) ProtoMessage() {}
 
 func (x *Event) ProtoReflect() protoreflect.Message {
-	mi := &file_api_api_proto_msgTypes[10]
+	mi := &file_api_api_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -635,7 +729,7 @@ func (x *Event) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Event.ProtoReflect.Descriptor instead.
 func (*Event) Descriptor() ([]byte, []int) {
-	return file_api_api_proto_rawDescGZIP(), []int{10}
+	return file_api_api_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *Event) GetName() string {
@@ -678,7 +772,7 @@ type User struct {
 func (x *User) Reset() {
 	*x = User{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_api_proto_msgTypes[11]
+		mi := &file_api_api_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -691,7 +785,7 @@ func (x *User) String() string {
 func (*User) ProtoMessage() {}
 
 func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_api_api_proto_msgTypes[11]
+	mi := &file_api_api_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -704,7 +798,7 @@ func (x *User) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use User.ProtoReflect.Descriptor instead.
 func (*User) Descriptor() ([]byte, []int) {
-	return file_api_api_proto_rawDescGZIP(), []int{11}
+	return file_api_api_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *User) GetName() string {
@@ -736,7 +830,7 @@ type Payment struct {
 func (x *Payment) Reset() {
 	*x = Payment{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_api_proto_msgTypes[12]
+		mi := &file_api_api_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -749,7 +843,7 @@ func (x *Payment) String() string {
 func (*Payment) ProtoMessage() {}
 
 func (x *Payment) ProtoReflect() protoreflect.Message {
-	mi := &file_api_api_proto_msgTypes[12]
+	mi := &file_api_api_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -762,7 +856,7 @@ func (x *Payment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Payment.ProtoReflect.Descriptor instead.
 func (*Payment) Descriptor() ([]byte, []int) {
-	return file_api_api_proto_rawDescGZIP(), []int{12}
+	return file_api_api_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *Payment) GetName() string {
@@ -813,7 +907,7 @@ type Exchange struct {
 func (x *Exchange) Reset() {
 	*x = Exchange{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_api_proto_msgTypes[13]
+		mi := &file_api_api_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -826,7 +920,7 @@ func (x *Exchange) String() string {
 func (*Exchange) ProtoMessage() {}
 
 func (x *Exchange) ProtoReflect() protoreflect.Message {
-	mi := &file_api_api_proto_msgTypes[13]
+	mi := &file_api_api_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -839,7 +933,7 @@ func (x *Exchange) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Exchange.ProtoReflect.Descriptor instead.
 func (*Exchange) Descriptor() ([]byte, []int) {
-	return file_api_api_proto_rawDescGZIP(), []int{13}
+	return file_api_api_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *Exchange) GetPrice() int32 {
@@ -875,7 +969,7 @@ type PaymentSummary struct {
 func (x *PaymentSummary) Reset() {
 	*x = PaymentSummary{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_api_proto_msgTypes[14]
+		mi := &file_api_api_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -888,7 +982,7 @@ func (x *PaymentSummary) String() string {
 func (*PaymentSummary) ProtoMessage() {}
 
 func (x *PaymentSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_api_api_proto_msgTypes[14]
+	mi := &file_api_api_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -901,7 +995,7 @@ func (x *PaymentSummary) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PaymentSummary.ProtoReflect.Descriptor instead.
 func (*PaymentSummary) Descriptor() ([]byte, []int) {
-	return file_api_api_proto_rawDescGZIP(), []int{14}
+	return file_api_api_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *PaymentSummary) GetUser() *User {
@@ -924,7 +1018,14 @@ var file_api_api_proto_rawDesc = []byte{
 	0x0a, 0x0d, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x70, 0x69, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12,
 	0x03, 0x61, 0x70, 0x69, 0x1a, 0x1c, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x61, 0x70, 0x69,
 	0x2f, 0x61, 0x6e, 0x6e, 0x6f, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x22, 0x8d, 0x01, 0x0a, 0x11, 0x41, 0x64, 0x64, 0x50, 0x61, 0x79, 0x6d, 0x65, 0x6e,
+	0x74, 0x6f, 0x22, 0x32, 0x0a, 0x12, 0x52, 0x65, 0x61, 0x64, 0x50, 0x61, 0x79, 0x6d, 0x65, 0x6e,
+	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1c, 0x0a, 0x09, 0x70, 0x61, 0x79, 0x6d,
+	0x65, 0x6e, 0x74, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x70, 0x61, 0x79,
+	0x6d, 0x65, 0x6e, 0x74, 0x49, 0x64, 0x22, 0x3a, 0x0a, 0x10, 0x52, 0x65, 0x61, 0x64, 0x50, 0x61,
+	0x79, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x12, 0x26, 0x0a, 0x07, 0x70, 0x61,
+	0x79, 0x6d, 0x65, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x61, 0x70,
+	0x69, 0x2e, 0x50, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x07, 0x70, 0x61, 0x79, 0x6d, 0x65,
+	0x6e, 0x74, 0x22, 0x8d, 0x01, 0x0a, 0x11, 0x41, 0x64, 0x64, 0x50, 0x61, 0x79, 0x6d, 0x65, 0x6e,
 	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65,
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x14, 0x0a, 0x05,
 	0x70, 0x72, 0x69, 0x63, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x05, 0x70, 0x72, 0x69,
@@ -1007,7 +1108,7 @@ var file_api_api_proto_rawDesc = []byte{
 	0x28, 0x0b, 0x32, 0x09, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x52, 0x04, 0x75,
 	0x73, 0x65, 0x72, 0x12, 0x22, 0x0a, 0x0c, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x45, 0x78, 0x70, 0x65,
 	0x6e, 0x73, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0c, 0x74, 0x6f, 0x74, 0x61, 0x6c,
-	0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x32, 0xd1, 0x03, 0x0a, 0x0e, 0x57, 0x61, 0x6c, 0x69,
+	0x45, 0x78, 0x70, 0x65, 0x6e, 0x73, 0x65, 0x32, 0xad, 0x04, 0x0a, 0x0e, 0x57, 0x61, 0x6c, 0x69,
 	0x63, 0x61, 0x43, 0x6c, 0x6f, 0x6e, 0x65, 0x41, 0x70, 0x69, 0x12, 0x56, 0x0a, 0x0a, 0x41, 0x64,
 	0x64, 0x50, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x16, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x41,
 	0x64, 0x64, 0x50, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
@@ -1036,11 +1137,17 @@ var file_api_api_proto_rawDesc = []byte{
 	0x65, 0x72, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x61, 0x70, 0x69,
 	0x2e, 0x52, 0x65, 0x61, 0x64, 0x41, 0x6c, 0x6c, 0x55, 0x73, 0x65, 0x72, 0x73, 0x52, 0x65, 0x70,
 	0x6c, 0x79, 0x22, 0x17, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x11, 0x3a, 0x01, 0x2a, 0x22, 0x0c, 0x2f,
-	0x76, 0x31, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x2f, 0x61, 0x6c, 0x6c, 0x42, 0x38, 0x5a, 0x36, 0x67,
-	0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x75, 0x63, 0x68, 0x69, 0x6a, 0x6f,
-	0x2f, 0x77, 0x61, 0x6c, 0x69, 0x63, 0x61, 0x2d, 0x63, 0x6c, 0x6f, 0x6e, 0x65, 0x2d, 0x62, 0x61,
-	0x63, 0x6b, 0x65, 0x6e, 0x64, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x2f, 0x61, 0x70, 0x69, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x76, 0x31, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x2f, 0x61, 0x6c, 0x6c, 0x12, 0x5a, 0x0a, 0x0b, 0x52,
+	0x65, 0x61, 0x64, 0x50, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x17, 0x2e, 0x61, 0x70, 0x69,
+	0x2e, 0x52, 0x65, 0x61, 0x64, 0x50, 0x61, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x15, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x52, 0x65, 0x61, 0x64, 0x50, 0x61,
+	0x79, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x70, 0x6c, 0x79, 0x22, 0x1b, 0x82, 0xd3, 0xe4, 0x93,
+	0x02, 0x15, 0x3a, 0x01, 0x2a, 0x22, 0x10, 0x2f, 0x76, 0x31, 0x2f, 0x70, 0x61, 0x79, 0x6d, 0x65,
+	0x6e, 0x74, 0x2f, 0x72, 0x65, 0x61, 0x64, 0x42, 0x38, 0x5a, 0x36, 0x67, 0x69, 0x74, 0x68, 0x75,
+	0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x75, 0x63, 0x68, 0x69, 0x6a, 0x6f, 0x2f, 0x77, 0x61, 0x6c,
+	0x69, 0x63, 0x61, 0x2d, 0x63, 0x6c, 0x6f, 0x6e, 0x65, 0x2d, 0x62, 0x61, 0x63, 0x6b, 0x65, 0x6e,
+	0x64, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x61, 0x70,
+	0x69, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1055,51 +1162,56 @@ func file_api_api_proto_rawDescGZIP() []byte {
 	return file_api_api_proto_rawDescData
 }
 
-var file_api_api_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_api_api_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_api_api_proto_goTypes = []interface{}{
-	(*AddPaymentRequest)(nil),    // 0: api.AddPaymentRequest
-	(*AddPaymentReply)(nil),      // 1: api.AddPaymentReply
-	(*CreateEventRequest)(nil),   // 2: api.CreateEventRequest
-	(*CreateEventReply)(nil),     // 3: api.CreateEventReply
-	(*ReadInfoRequest)(nil),      // 4: api.ReadInfoRequest
-	(*ReadInfoReply)(nil),        // 5: api.ReadInfoReply
-	(*UpdatePaymentRequest)(nil), // 6: api.UpdatePaymentRequest
-	(*UpdatePaymentReply)(nil),   // 7: api.UpdatePaymentReply
-	(*ReadAllUsersRequest)(nil),  // 8: api.ReadAllUsersRequest
-	(*ReadAllUsersReply)(nil),    // 9: api.ReadAllUsersReply
-	(*Event)(nil),                // 10: api.Event
-	(*User)(nil),                 // 11: api.User
-	(*Payment)(nil),              // 12: api.Payment
-	(*Exchange)(nil),             // 13: api.Exchange
-	(*PaymentSummary)(nil),       // 14: api.PaymentSummary
+	(*ReadPaymentRequest)(nil),   // 0: api.ReadPaymentRequest
+	(*ReadPaymentReply)(nil),     // 1: api.ReadPaymentReply
+	(*AddPaymentRequest)(nil),    // 2: api.AddPaymentRequest
+	(*AddPaymentReply)(nil),      // 3: api.AddPaymentReply
+	(*CreateEventRequest)(nil),   // 4: api.CreateEventRequest
+	(*CreateEventReply)(nil),     // 5: api.CreateEventReply
+	(*ReadInfoRequest)(nil),      // 6: api.ReadInfoRequest
+	(*ReadInfoReply)(nil),        // 7: api.ReadInfoReply
+	(*UpdatePaymentRequest)(nil), // 8: api.UpdatePaymentRequest
+	(*UpdatePaymentReply)(nil),   // 9: api.UpdatePaymentReply
+	(*ReadAllUsersRequest)(nil),  // 10: api.ReadAllUsersRequest
+	(*ReadAllUsersReply)(nil),    // 11: api.ReadAllUsersReply
+	(*Event)(nil),                // 12: api.Event
+	(*User)(nil),                 // 13: api.User
+	(*Payment)(nil),              // 14: api.Payment
+	(*Exchange)(nil),             // 15: api.Exchange
+	(*PaymentSummary)(nil),       // 16: api.PaymentSummary
 }
 var file_api_api_proto_depIdxs = []int32{
-	12, // 0: api.ReadInfoReply.payments:type_name -> api.Payment
-	13, // 1: api.ReadInfoReply.exchanges:type_name -> api.Exchange
-	14, // 2: api.ReadInfoReply.summaries:type_name -> api.PaymentSummary
-	11, // 3: api.ReadAllUsersReply.users:type_name -> api.User
-	11, // 4: api.Event.users:type_name -> api.User
-	12, // 5: api.Event.payments:type_name -> api.Payment
-	11, // 6: api.Payment.payer:type_name -> api.User
-	11, // 7: api.Payment.payees:type_name -> api.User
-	11, // 8: api.Exchange.payer:type_name -> api.User
-	11, // 9: api.Exchange.payee:type_name -> api.User
-	11, // 10: api.PaymentSummary.user:type_name -> api.User
-	0,  // 11: api.WalicaCloneApi.AddPayment:input_type -> api.AddPaymentRequest
-	2,  // 12: api.WalicaCloneApi.CreateEvent:input_type -> api.CreateEventRequest
-	4,  // 13: api.WalicaCloneApi.ReadInfo:input_type -> api.ReadInfoRequest
-	6,  // 14: api.WalicaCloneApi.UpdatePayment:input_type -> api.UpdatePaymentRequest
-	8,  // 15: api.WalicaCloneApi.ReadAllUsers:input_type -> api.ReadAllUsersRequest
-	1,  // 16: api.WalicaCloneApi.AddPayment:output_type -> api.AddPaymentReply
-	3,  // 17: api.WalicaCloneApi.CreateEvent:output_type -> api.CreateEventReply
-	5,  // 18: api.WalicaCloneApi.ReadInfo:output_type -> api.ReadInfoReply
-	7,  // 19: api.WalicaCloneApi.UpdatePayment:output_type -> api.UpdatePaymentReply
-	9,  // 20: api.WalicaCloneApi.ReadAllUsers:output_type -> api.ReadAllUsersReply
-	16, // [16:21] is the sub-list for method output_type
-	11, // [11:16] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	14, // 0: api.ReadPaymentReply.payment:type_name -> api.Payment
+	14, // 1: api.ReadInfoReply.payments:type_name -> api.Payment
+	15, // 2: api.ReadInfoReply.exchanges:type_name -> api.Exchange
+	16, // 3: api.ReadInfoReply.summaries:type_name -> api.PaymentSummary
+	13, // 4: api.ReadAllUsersReply.users:type_name -> api.User
+	13, // 5: api.Event.users:type_name -> api.User
+	14, // 6: api.Event.payments:type_name -> api.Payment
+	13, // 7: api.Payment.payer:type_name -> api.User
+	13, // 8: api.Payment.payees:type_name -> api.User
+	13, // 9: api.Exchange.payer:type_name -> api.User
+	13, // 10: api.Exchange.payee:type_name -> api.User
+	13, // 11: api.PaymentSummary.user:type_name -> api.User
+	2,  // 12: api.WalicaCloneApi.AddPayment:input_type -> api.AddPaymentRequest
+	4,  // 13: api.WalicaCloneApi.CreateEvent:input_type -> api.CreateEventRequest
+	6,  // 14: api.WalicaCloneApi.ReadInfo:input_type -> api.ReadInfoRequest
+	8,  // 15: api.WalicaCloneApi.UpdatePayment:input_type -> api.UpdatePaymentRequest
+	10, // 16: api.WalicaCloneApi.ReadAllUsers:input_type -> api.ReadAllUsersRequest
+	0,  // 17: api.WalicaCloneApi.ReadPayment:input_type -> api.ReadPaymentRequest
+	3,  // 18: api.WalicaCloneApi.AddPayment:output_type -> api.AddPaymentReply
+	5,  // 19: api.WalicaCloneApi.CreateEvent:output_type -> api.CreateEventReply
+	7,  // 20: api.WalicaCloneApi.ReadInfo:output_type -> api.ReadInfoReply
+	9,  // 21: api.WalicaCloneApi.UpdatePayment:output_type -> api.UpdatePaymentReply
+	11, // 22: api.WalicaCloneApi.ReadAllUsers:output_type -> api.ReadAllUsersReply
+	1,  // 23: api.WalicaCloneApi.ReadPayment:output_type -> api.ReadPaymentReply
+	18, // [18:24] is the sub-list for method output_type
+	12, // [12:18] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_api_api_proto_init() }
@@ -1109,7 +1221,7 @@ func file_api_api_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_api_api_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddPaymentRequest); i {
+			switch v := v.(*ReadPaymentRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1121,7 +1233,7 @@ func file_api_api_proto_init() {
 			}
 		}
 		file_api_api_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddPaymentReply); i {
+			switch v := v.(*ReadPaymentReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1133,7 +1245,7 @@ func file_api_api_proto_init() {
 			}
 		}
 		file_api_api_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateEventRequest); i {
+			switch v := v.(*AddPaymentRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1145,7 +1257,7 @@ func file_api_api_proto_init() {
 			}
 		}
 		file_api_api_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateEventReply); i {
+			switch v := v.(*AddPaymentReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1157,7 +1269,7 @@ func file_api_api_proto_init() {
 			}
 		}
 		file_api_api_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReadInfoRequest); i {
+			switch v := v.(*CreateEventRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1169,7 +1281,7 @@ func file_api_api_proto_init() {
 			}
 		}
 		file_api_api_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReadInfoReply); i {
+			switch v := v.(*CreateEventReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1181,7 +1293,7 @@ func file_api_api_proto_init() {
 			}
 		}
 		file_api_api_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdatePaymentRequest); i {
+			switch v := v.(*ReadInfoRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1193,7 +1305,7 @@ func file_api_api_proto_init() {
 			}
 		}
 		file_api_api_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdatePaymentReply); i {
+			switch v := v.(*ReadInfoReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1205,7 +1317,7 @@ func file_api_api_proto_init() {
 			}
 		}
 		file_api_api_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReadAllUsersRequest); i {
+			switch v := v.(*UpdatePaymentRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1217,7 +1329,7 @@ func file_api_api_proto_init() {
 			}
 		}
 		file_api_api_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReadAllUsersReply); i {
+			switch v := v.(*UpdatePaymentReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1229,7 +1341,7 @@ func file_api_api_proto_init() {
 			}
 		}
 		file_api_api_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Event); i {
+			switch v := v.(*ReadAllUsersRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1241,7 +1353,7 @@ func file_api_api_proto_init() {
 			}
 		}
 		file_api_api_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*User); i {
+			switch v := v.(*ReadAllUsersReply); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1253,7 +1365,7 @@ func file_api_api_proto_init() {
 			}
 		}
 		file_api_api_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Payment); i {
+			switch v := v.(*Event); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1265,7 +1377,7 @@ func file_api_api_proto_init() {
 			}
 		}
 		file_api_api_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Exchange); i {
+			switch v := v.(*User); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1277,6 +1389,30 @@ func file_api_api_proto_init() {
 			}
 		}
 		file_api_api_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Payment); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_api_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Exchange); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_api_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*PaymentSummary); i {
 			case 0:
 				return &v.state
@@ -1295,7 +1431,7 @@ func file_api_api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_api_api_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   15,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

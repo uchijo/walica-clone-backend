@@ -37,7 +37,17 @@ service WalicaCloneApi {
       body : "*"
     };
   }
+  rpc ReadPayment(ReadPaymentRequest) returns (ReadPaymentReply) {
+    option (google.api.http) = {
+      post : "/v1/payment/read"
+      body : "*"
+    };
+  }
 }
+
+message ReadPaymentRequest { string paymentId = 1; }
+
+message ReadPaymentReply { Payment payment = 1; }
 
 message AddPaymentRequest {
   string name = 1;

@@ -112,6 +112,38 @@
         ]
       }
     },
+    "/v1/payment/read": {
+      "post": {
+        "operationId": "WalicaCloneApi_ReadPayment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiReadPaymentReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiReadPaymentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "WalicaCloneApi"
+        ]
+      }
+    },
     "/v1/payment/update": {
       "post": {
         "operationId": "WalicaCloneApi_UpdatePayment",
@@ -341,6 +373,22 @@
       "type": "object",
       "properties": {
         "id": {
+          "type": "string"
+        }
+      }
+    },
+    "apiReadPaymentReply": {
+      "type": "object",
+      "properties": {
+        "payment": {
+          "$ref": "#/definitions/apiPayment"
+        }
+      }
+    },
+    "apiReadPaymentRequest": {
+      "type": "object",
+      "properties": {
+        "paymentId": {
           "type": "string"
         }
       }

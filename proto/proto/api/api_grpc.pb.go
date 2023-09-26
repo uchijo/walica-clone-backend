@@ -24,6 +24,7 @@ const (
 	WalicaCloneApi_ReadInfo_FullMethodName      = "/api.WalicaCloneApi/ReadInfo"
 	WalicaCloneApi_UpdatePayment_FullMethodName = "/api.WalicaCloneApi/UpdatePayment"
 	WalicaCloneApi_ReadAllUsers_FullMethodName  = "/api.WalicaCloneApi/ReadAllUsers"
+	WalicaCloneApi_ReadPayment_FullMethodName   = "/api.WalicaCloneApi/ReadPayment"
 )
 
 // WalicaCloneApiClient is the client API for WalicaCloneApi service.
@@ -35,6 +36,7 @@ type WalicaCloneApiClient interface {
 	ReadInfo(ctx context.Context, in *ReadInfoRequest, opts ...grpc.CallOption) (*ReadInfoReply, error)
 	UpdatePayment(ctx context.Context, in *UpdatePaymentRequest, opts ...grpc.CallOption) (*UpdatePaymentReply, error)
 	ReadAllUsers(ctx context.Context, in *ReadAllUsersRequest, opts ...grpc.CallOption) (*ReadAllUsersReply, error)
+	ReadPayment(ctx context.Context, in *ReadPaymentRequest, opts ...grpc.CallOption) (*ReadPaymentReply, error)
 }
 
 type walicaCloneApiClient struct {
@@ -90,6 +92,15 @@ func (c *walicaCloneApiClient) ReadAllUsers(ctx context.Context, in *ReadAllUser
 	return out, nil
 }
 
+func (c *walicaCloneApiClient) ReadPayment(ctx context.Context, in *ReadPaymentRequest, opts ...grpc.CallOption) (*ReadPaymentReply, error) {
+	out := new(ReadPaymentReply)
+	err := c.cc.Invoke(ctx, WalicaCloneApi_ReadPayment_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // WalicaCloneApiServer is the server API for WalicaCloneApi service.
 // All implementations should embed UnimplementedWalicaCloneApiServer
 // for forward compatibility
@@ -99,6 +110,7 @@ type WalicaCloneApiServer interface {
 	ReadInfo(context.Context, *ReadInfoRequest) (*ReadInfoReply, error)
 	UpdatePayment(context.Context, *UpdatePaymentRequest) (*UpdatePaymentReply, error)
 	ReadAllUsers(context.Context, *ReadAllUsersRequest) (*ReadAllUsersReply, error)
+	ReadPayment(context.Context, *ReadPaymentRequest) (*ReadPaymentReply, error)
 }
 
 // UnimplementedWalicaCloneApiServer should be embedded to have forward compatible implementations.
@@ -119,6 +131,9 @@ func (UnimplementedWalicaCloneApiServer) UpdatePayment(context.Context, *UpdateP
 }
 func (UnimplementedWalicaCloneApiServer) ReadAllUsers(context.Context, *ReadAllUsersRequest) (*ReadAllUsersReply, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReadAllUsers not implemented")
+}
+func (UnimplementedWalicaCloneApiServer) ReadPayment(context.Context, *ReadPaymentRequest) (*ReadPaymentReply, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadPayment not implemented")
 }
 
 // UnsafeWalicaCloneApiServer may be embedded to opt out of forward compatibility for this service.
@@ -222,6 +237,24 @@ func _WalicaCloneApi_ReadAllUsers_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _WalicaCloneApi_ReadPayment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReadPaymentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WalicaCloneApiServer).ReadPayment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: WalicaCloneApi_ReadPayment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WalicaCloneApiServer).ReadPayment(ctx, req.(*ReadPaymentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // WalicaCloneApi_ServiceDesc is the grpc.ServiceDesc for WalicaCloneApi service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -248,6 +281,10 @@ var WalicaCloneApi_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReadAllUsers",
 			Handler:    _WalicaCloneApi_ReadAllUsers_Handler,
+		},
+		{
+			MethodName: "ReadPayment",
+			Handler:    _WalicaCloneApi_ReadPayment_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
