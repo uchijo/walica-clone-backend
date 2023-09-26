@@ -111,6 +111,16 @@ func (s *server) ReadPayment(ctx context.Context, req *apipb.ReadPaymentRequest)
 	}, nil
 }
 
+func (s *server) DeletePayment(ctx context.Context, req *apipb.DeletePaymentRequest) (*apipb.DeletePaymentReply, error) {
+	err := usecase.DeletePayment(*s.repositry, req.PaymentId)
+	if err != nil {
+		return nil, err
+	}
+	return &apipb.DeletePaymentReply{
+		PaymentId: req.PaymentId,
+	}, nil
+}
+
 func convertSummary(s domain.PaymentSummary) *apipb.PaymentSummary {
 	return &apipb.PaymentSummary{
 		User:         convertUser(*s.User),

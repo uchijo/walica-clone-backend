@@ -57,7 +57,7 @@ type Repository interface {
 	//   - id of deleting payment
 	// output
 	//   - error
-	// DeletePayment(paymentId string) error
+	DeletePayment(paymentId string) error
 
 	// ReadAllUsers reads all users in the event
 	// input
