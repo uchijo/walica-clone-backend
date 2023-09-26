@@ -163,6 +163,14 @@ func (r RepositoryImpl) ReadAllUsers(eventId string) (domain.UserCollection, err
 	return users, nil
 }
 
+func (r RepositoryImpl) ReadPayment(paymentId string) (domain.Payment, error) {
+	rawPayment := model.Payment{}
+	if err := util.DB.Where("id = ?", paymentId).First(&rawPayment).Error; err != nil {
+		return domain.Payment{}, err
+	}
+	return convertPayment(rawPayment)
+}
+
 func convertUser(input model.User) domain.User {
 	return domain.User{
 		Name: input.Name,

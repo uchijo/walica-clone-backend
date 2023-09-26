@@ -101,6 +101,16 @@ func (s *server) ReadAllUsers(ctx context.Context, req *apipb.ReadAllUsersReques
 	}, nil
 }
 
+func (s *server) ReadPayment(ctx context.Context, req *apipb.ReadPaymentRequest) (*apipb.ReadPaymentReply, error) {
+	payment, err := usecase.ReadPayment(*s.repositry, req.PaymentId)
+	if err != nil {
+		return nil, err
+	}
+	return &apipb.ReadPaymentReply{
+		Payment: convertPayment(payment),
+	}, nil
+}
+
 func convertSummary(s domain.PaymentSummary) *apipb.PaymentSummary {
 	return &apipb.PaymentSummary{
 		User:         convertUser(*s.User),

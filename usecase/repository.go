@@ -26,7 +26,7 @@ type Repository interface {
 	// output
 	//   - payment info
 	//   - error
-	// ReadPayment(paymentId string) domain.Payment
+	ReadPayment(paymentId string) (domain.Payment, error)
 
 	// CreatePayment creates payment record
 	// input
