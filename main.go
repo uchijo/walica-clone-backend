@@ -5,6 +5,7 @@ import (
 	"log"
 	"net"
 	"net/http"
+	"os"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/rs/cors"
@@ -52,8 +53,13 @@ func main() {
 		log.Fatalln("Failed to register gateway:", err)
 	}
 
+	corsOrigin := os.Getenv("CORS_ORIGIN")
+	if len(corsOrigin) <= 0 {
+		log.Fatalln("CORS_ORIGIN not set.")
+	}
+
 	withCors := cors.New(cors.Options{
-		AllowedOrigins: []string{"http://localhost:3000"},
+		AllowedOrigins: []string{corsOrigin},
 		AllowedMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders: []string{"*"},
 	}).Handler(gwmux)
