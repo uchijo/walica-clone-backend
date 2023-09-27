@@ -48,3 +48,5 @@ go build
 ## その他注意点など
 
 grpcのポートは8080, grpc gatewayのポートは8090となっています。
+
+`api.proto`を更新した際は、`cd proto && buf generate`でスタブの生成を行えます。
