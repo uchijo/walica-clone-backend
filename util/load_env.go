@@ -9,6 +9,6 @@ import (
 func LoadEnv() {
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("failed to load environment variables.")
+		log.Print(".env file not found. going to load from bare env vars.")
 	}
 }
